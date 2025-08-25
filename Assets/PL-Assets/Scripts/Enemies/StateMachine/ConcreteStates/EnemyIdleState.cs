@@ -60,7 +60,7 @@ public class EnemyIdleState : EnemyState
     
     private Vector3 GetRandomPointInCircle()
     {
-        return enemy.transform.position + (Vector3)UnityEngine.Random.insideUnitSphere * enemy.RandomMovementRange;
+        return enemy.transform.position + (Vector3)UnityEngine.Random.insideUnitCircle * enemy.RandomMovementRange;
     }
 
 }

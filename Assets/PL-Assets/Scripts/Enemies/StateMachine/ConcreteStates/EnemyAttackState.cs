@@ -36,7 +36,7 @@ public class EnemyAttackState : EnemyState
             Vector2 dir = (_playerTransform.position - enemy.transform.position).normalized;
             Rigidbody2D bullet = Object.Instantiate(enemy.bulletPrefab, enemy.transform.position, Quaternion.identity);
             bullet.linearVelocity = dir * _bulletSpeed;
-
+            Object.Destroy(bullet.gameObject, 3f);
         }
 
         if (Vector2.Distance(_playerTransform.position, enemy.transform.position) > _distanceToCountExit)

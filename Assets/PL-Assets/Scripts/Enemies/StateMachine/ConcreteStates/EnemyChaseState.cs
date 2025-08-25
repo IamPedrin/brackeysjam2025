@@ -20,6 +20,11 @@ public class EnemyChaseState : EnemyState
         Vector2 moveDirection = (_playerTransform.position - enemy.transform.position).normalized;
         enemy.MoveEnemy(moveDirection * _movementSpeed);
 
+        if(!enemy.IsAggroed)
+        {
+            enemy.StateMachine.ChangeState(enemy.IdleState);
+        }
+
         if (enemy.IsWithinAttackingRange)
         {
             enemy.StateMachine.ChangeState(enemy.AttackState);
