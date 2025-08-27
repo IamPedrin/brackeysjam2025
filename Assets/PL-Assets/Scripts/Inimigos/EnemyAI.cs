@@ -74,25 +74,13 @@ public class EnemyAI : MonoBehaviour
         UpdateStateTransitions();
         ExecuteCurrentStateAction();
 
-        // switch (currentState)
-        // {
-        //     case EnemyState.Patrolling:
-        //         Patrol();
-        //         break;
-        //     case EnemyState.Chasing:
-        //         Chase();
-        //         break;
-        //     case EnemyState.Attacking:
-        //         Attack();
-        //         break;
-        // }
     }
 
     void UpdateStateTransitions()
     {
         bool canSeePlayer = lineOfSight.CanSeePlayer();
         
-        // --- LÓGICA DE AGGRO (MAIOR PRIORIDADE) ---
+        
         if (canSeePlayer)
         {
             aggroTimer = stats.aggroDuration;
@@ -113,14 +101,14 @@ public class EnemyAI : MonoBehaviour
             return; // Sai da função para não executar outras transições
         }
 
-        // --- LÓGICA APÓS PERDER O AGGRO ---
+        
         if (returningFromChase)
         {
             currentState = EnemyState.ReturningToStart;
             returningFromChase = false; // Reseta a flag
         }
 
-        // --- LÓGICA DOS ESTADOS NORMAIS ---
+        
         switch (currentState)
         {
             case EnemyState.ReturningToStart:
