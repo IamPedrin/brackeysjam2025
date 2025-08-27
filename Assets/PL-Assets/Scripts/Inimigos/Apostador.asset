@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be010a4be6f6d9a4e83d7ab4d35dc4b8, type: 3}
-  m_Name: MafiosoStats
+  m_Name: Apostador
   m_EditorClassIdentifier: 
   patrolSpeed: 1.5
   chaseSpeed: 4
-  health: 10
-  lineOfSightRadius: 10
-  aggroDuration: 2
-  attackType: 1
-  attackRange: 8
+  health: 100
+  lineOfSightRadius: 5
+  aggroDuration: 3
+  attackType: 0
+  attackRange: 1.03
   attackDamage: 10
   attackCooldown: 1.5
-  projectilePrefab: {fileID: 5311188052350928423, guid: b32cf94acd2147c46a780da4fbb8d1a3, type: 3}
-  projectileSpeed: 3
+  projectilePrefab: {fileID: 0}
+  projectileSpeed: 8
