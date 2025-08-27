@@ -11,12 +11,13 @@ public enum EnemyState
 
 public class EnemyAI : MonoBehaviour
 {
-    public enum InitialBehavior {Idle, Patrol}
+    public enum InitialBehavior { Idle, Patrol }
 
     [Header("Configurações Gerais")]
     public EnemyStats stats;
     public Transform[] patrolPoints;
     public LayerMask playerLayer;
+    public Transform projectileAttackPoint;
 
     [Header("Comportamento da IA")]
     public InitialBehavior initialBehavior = InitialBehavior.Patrol;
@@ -30,9 +31,9 @@ public class EnemyAI : MonoBehaviour
 
     //Controle de estado
     private Vector2 startPosition;
-    private bool wasPatrolling;
+    private bool isFacingRight = true;
     private bool returningFromChase = false;
-    
+
 
     [Header("Patrulha")]
     private int currentPatrolIndex = 0;
@@ -73,18 +74,18 @@ public class EnemyAI : MonoBehaviour
         //Transição de Estados
         UpdateStateTransitions();
         ExecuteCurrentStateAction();
-
+        UpdateSpriteDirection();
     }
 
     void UpdateStateTransitions()
     {
         bool canSeePlayer = lineOfSight.CanSeePlayer();
-        
-        
+
+
         if (canSeePlayer)
         {
             aggroTimer = stats.aggroDuration;
-            returningFromChase = true; // Marca que ele esteve em perseguição
+            returningFromChase = true;
         }
 
         if (aggroTimer > 0)
@@ -98,17 +99,17 @@ public class EnemyAI : MonoBehaviour
             {
                 currentState = EnemyState.Chasing;
             }
-            return; // Sai da função para não executar outras transições
+            return;
         }
 
-        
+
         if (returningFromChase)
         {
             currentState = EnemyState.ReturningToStart;
-            returningFromChase = false; // Reseta a flag
+            returningFromChase = false;
         }
 
-        
+
         switch (currentState)
         {
             case EnemyState.ReturningToStart:
@@ -145,24 +146,24 @@ public class EnemyAI : MonoBehaviour
         switch (currentState)
         {
             case EnemyState.Idle:
-                rb.linearVelocity = Vector2.zero; // Ação: Ficar parado
-                
+                rb.linearVelocity = Vector2.zero;
+
                 break;
             case EnemyState.Patrolling:
                 MoveTowards(patrolPoints[currentPatrolIndex].position, stats.patrolSpeed);
-                
+
                 break;
             case EnemyState.ReturningToStart:
-                MoveTowards(startPosition, stats.chaseSpeed); // Volta rápido
-                
+                MoveTowards(startPosition, stats.chaseSpeed);
+
                 break;
             case EnemyState.Chasing:
                 Chase();
-               
+
                 break;
             case EnemyState.Attacking:
                 Attack();
-                
+
                 break;
         }
     }
@@ -178,7 +179,7 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            rb.linearVelocity = Vector2.zero; // Para de se mover no ponto
+            rb.linearVelocity = Vector2.zero;
             patrolWaitTimer += Time.deltaTime;
             if (patrolWaitTimer >= waitTimeAtPatrolPoint)
             {
@@ -200,7 +201,6 @@ public class EnemyAI : MonoBehaviour
 
         if (attackTimer <= 0f)
         {
-            // Executa o ataque
             if (stats.attackType == AttackType.Melee)
             {
                 PerformMeleeAttack();
@@ -221,8 +221,15 @@ public class EnemyAI : MonoBehaviour
 
         foreach (Collider2D playerHit in hitPlayers)
         {
-            Debug.Log("Hit " + playerHit.name);
-            //PlayerHit Depois
+
+            PlayerHealth playerHealth = playerHit.GetComponent<PlayerHealth>();
+
+
+            if (playerHealth != null)
+            {
+                Debug.Log("Inimigo Melee acertou o jogador com " + stats.attackDamage + " de dano.");
+                playerHealth.TakeDamage(stats.attackDamage);
+            }
         }
     }
 
@@ -230,10 +237,19 @@ public class EnemyAI : MonoBehaviour
     {
         if (stats.projectilePrefab != null)
         {
-            GameObject projectile = Instantiate(stats.projectilePrefab, transform.position, Quaternion.identity);
-            Vector2 direction = (player.position - transform.position).normalized;
-            projectile.GetComponent<Rigidbody2D>().linearVelocity = direction * stats.projectileSpeed;
-            Destroy(projectile, 5f);
+            Vector2 spawnPosition = transform.position;
+            Vector2 direction = (player.position - (Vector3)spawnPosition).normalized;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
+
+            GameObject projectileGO = Instantiate(stats.projectilePrefab, spawnPosition, rotation);
+
+            EnemyProjectile projectile = projectileGO.GetComponent<EnemyProjectile>();
+
+            if (projectile != null)
+            {
+                projectile.Setup(stats.attackDamage, stats.projectileSpeed);
+            }
         }
     }
 
@@ -243,10 +259,32 @@ public class EnemyAI : MonoBehaviour
         rb.linearVelocity = direction * speed;
     }
 
-    
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, stats.attackRange);
+    }
+
+    void UpdateSpriteDirection()
+    {
+
+        if (rb.linearVelocity.x < -0.1f && isFacingRight)
+        {
+            Flip();
+        }
+
+        else if (rb.linearVelocity.x > 0.1f && !isFacingRight)
+        {
+            Flip();
+        }
+    }
+
+    void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        Vector3 ls = transform.localScale;
+        ls.x *= -1f;
+        transform.localScale = ls;
     }
 }

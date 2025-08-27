@@ -3,22 +3,25 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
-    private float moveSpeed = 5f;
+    public PlayerStats stats;
+    public Vector2 LastMoveDirection { get; private set; }
     private Rigidbody2D rb;
     private Vector2 moveInput;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        LastMoveDirection = Vector2.down;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        rb.linearVelocity = moveInput * moveSpeed;
+        rb.linearVelocity = moveInput * stats.moveSpeed;
+
+        if (moveInput.sqrMagnitude > 0.1f)
+        {
+            LastMoveDirection = moveInput.normalized;
+        }
     }
 
     public void Move(InputAction.CallbackContext context)

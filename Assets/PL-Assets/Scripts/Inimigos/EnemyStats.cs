@@ -21,8 +21,11 @@ public class EnemyStats : ScriptableObject
     [Header("Combat")]
     public AttackType attackType;
     public float attackRange = 1f;
-    public float attackDamage = 10f;
+    public int attackDamage = 1;
     public float attackCooldown = 1.5f; // Tempo entre ataques
+
+    [Header("Ranged")]
     public GameObject projectilePrefab; // Ranged
     public float projectileSpeed = 8f; //  Ranged
+
 }
