@@ -149,13 +149,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setorSize: 10
-  seed: 69
+  seed: 10
   salaPrefabs:
   - {fileID: 1608834351389142811, guid: aa568815698822f45bf8a2bddc172df4, type: 3}
   - {fileID: 4189158448433317332, guid: 06a4fb0f057ed374ba0e0aacdf95f506, type: 3}
   - {fileID: 6446479166075438546, guid: 62f7a24b7eb3b1b48a4488e8c4bb9767, type: 3}
   playerRoomPrefab: {fileID: 3301819374389078407, guid: 6866f2da091a6ba468b3deeb415174bc, type: 3}
-  bossRoomPrefab: {fileID: 4808148236861955020, guid: 0f220bf2881d0854e96e8764f228f18e, type: 3}
+  bossRoomPrefab: {fileID: 3301819374389078407, guid: 6866f2da091a6ba468b3deeb415174bc, type: 3}
+  corredorPrefab: {fileID: 4808148236861955020, guid: 0f220bf2881d0854e96e8764f228f18e, type: 3}
 --- !u!4 &762430465
 Transform:
   m_ObjectHideFlags: 0
