@@ -16,9 +16,9 @@ MonoBehaviour:
   chaseSpeed: 4
   health: 10
   lineOfSightRadius: 10
-  aggroDuration: 3
-  attackType: 0
-  attackRange: 2
+  aggroDuration: 2
+  attackType: 1
+  attackRange: 8
   attackDamage: 10
   attackCooldown: 1.5
   projectilePrefab: {fileID: 5311188052350928423, guid: b32cf94acd2147c46a780da4fbb8d1a3, type: 3}

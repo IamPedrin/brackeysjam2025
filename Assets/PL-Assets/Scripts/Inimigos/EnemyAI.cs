@@ -5,20 +5,34 @@ public enum EnemyState
     Idle,
     Patrolling,
     Chasing,
-    Attacking
+    Attacking,
+    ReturningToStart
 }
 
 public class EnemyAI : MonoBehaviour
 {
+    public enum InitialBehavior {Idle, Patrol}
+
+    [Header("Configurações Gerais")]
     public EnemyStats stats;
     public Transform[] patrolPoints;
-    public float waitTimeAtPatrolPoint = 1f;
     public LayerMask playerLayer;
 
+    [Header("Comportamento da IA")]
+    public InitialBehavior initialBehavior = InitialBehavior.Patrol;
+    public float waitTimeAtPatrolPoint = 2f;
     private EnemyState currentState;
+
+    //Componentes e referencias
     private LineOfSight lineOfSight;
     private Transform player;
     private Rigidbody2D rb;
+
+    //Controle de estado
+    private Vector2 startPosition;
+    private bool wasPatrolling;
+    private bool returningFromChase = false;
+    
 
     [Header("Patrulha")]
     private int currentPatrolIndex = 0;
@@ -36,6 +50,17 @@ public class EnemyAI : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         currentState = EnemyState.Patrolling;
+        startPosition = transform.position;
+
+        if (initialBehavior == InitialBehavior.Patrol && patrolPoints.Length > 0)
+        {
+            currentState = EnemyState.Patrolling;
+        }
+        else
+        {
+            currentState = EnemyState.Idle;
+        }
+
         attackTimer = 0;
     }
 
@@ -47,35 +72,36 @@ public class EnemyAI : MonoBehaviour
 
         //Transição de Estados
         UpdateStateTransitions();
+        ExecuteCurrentStateAction();
 
-        switch (currentState)
-        {
-            case EnemyState.Patrolling:
-                Patrol();
-                break;
-            case EnemyState.Chasing:
-                Chase();
-                break;
-            case EnemyState.Attacking:
-                Attack();
-                break;
-        }
-
+        // switch (currentState)
+        // {
+        //     case EnemyState.Patrolling:
+        //         Patrol();
+        //         break;
+        //     case EnemyState.Chasing:
+        //         Chase();
+        //         break;
+        //     case EnemyState.Attacking:
+        //         Attack();
+        //         break;
+        // }
     }
 
     void UpdateStateTransitions()
     {
         bool canSeePlayer = lineOfSight.CanSeePlayer();
-        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-
+        
+        // --- LÓGICA DE AGGRO (MAIOR PRIORIDADE) ---
         if (canSeePlayer)
         {
-            aggroTimer = stats.aggroDuration; // Reseta o timer de aggro
+            aggroTimer = stats.aggroDuration;
+            returningFromChase = true; // Marca que ele esteve em perseguição
         }
 
-        // Se o inimigo está aggro (viu o jogador recentemente)
         if (aggroTimer > 0)
         {
+            float distanceToPlayer = Vector2.Distance(transform.position, player.position);
             if (distanceToPlayer <= stats.attackRange && canSeePlayer)
             {
                 currentState = EnemyState.Attacking;
@@ -84,10 +110,72 @@ public class EnemyAI : MonoBehaviour
             {
                 currentState = EnemyState.Chasing;
             }
+            return; // Sai da função para não executar outras transições
         }
-        else
+
+        // --- LÓGICA APÓS PERDER O AGGRO ---
+        if (returningFromChase)
         {
-            currentState = EnemyState.Patrolling;
+            currentState = EnemyState.ReturningToStart;
+            returningFromChase = false; // Reseta a flag
+        }
+
+        // --- LÓGICA DOS ESTADOS NORMAIS ---
+        switch (currentState)
+        {
+            case EnemyState.ReturningToStart:
+                if (Vector2.Distance(transform.position, startPosition) < 0.1f)
+                {
+                    currentState = EnemyState.Idle; // Chegou ao início, fica ocioso
+                }
+                break;
+            case EnemyState.Patrolling:
+                if (patrolPoints.Length > 0 && Vector2.Distance(transform.position, patrolPoints[currentPatrolIndex].position) < 0.1f)
+                {
+                    currentState = EnemyState.Idle; // Chegou a um ponto, fica ocioso
+                }
+                break;
+            case EnemyState.Idle:
+                // Se ele estava patrulhando antes, espera e volta a patrulhar
+                if (initialBehavior == InitialBehavior.Patrol && patrolPoints.Length > 0)
+                {
+                    patrolWaitTimer += Time.deltaTime;
+                    if (patrolWaitTimer >= waitTimeAtPatrolPoint)
+                    {
+                        patrolWaitTimer = 0f;
+                        currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
+                        currentState = EnemyState.Patrolling;
+                    }
+                }
+                // Se ele é um guarda estático, ele simplesmente fica em Idle.
+                break;
+        }
+    }
+
+    void ExecuteCurrentStateAction()
+    {
+        switch (currentState)
+        {
+            case EnemyState.Idle:
+                rb.linearVelocity = Vector2.zero; // Ação: Ficar parado
+                
+                break;
+            case EnemyState.Patrolling:
+                MoveTowards(patrolPoints[currentPatrolIndex].position, stats.patrolSpeed);
+                
+                break;
+            case EnemyState.ReturningToStart:
+                MoveTowards(startPosition, stats.chaseSpeed); // Volta rápido
+                
+                break;
+            case EnemyState.Chasing:
+                Chase();
+               
+                break;
+            case EnemyState.Attacking:
+                Attack();
+                
+                break;
         }
     }
 
