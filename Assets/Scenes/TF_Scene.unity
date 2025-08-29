@@ -1069,6 +1069,11 @@ Transform:
   - {fileID: 573616021}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1169270314 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3820315252660525344, guid: 0d41cfd61a837fb4aaad0acd99d8b474, type: 3}
+  m_PrefabInstance: {fileID: 792403386374738702}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1242037579
 GameObject:
   m_ObjectHideFlags: 0
@@ -1144,6 +1149,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1242037579}
   m_CullTransparentMesh: 1
+--- !u!4 &1418465087 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7101515684876734515, guid: 0d41cfd61a837fb4aaad0acd99d8b474, type: 3}
+  m_PrefabInstance: {fileID: 792403386374738702}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1762782919
 GameObject:
   m_ObjectHideFlags: 0
@@ -1389,6 +1399,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6507835128880336548, guid: 7dc058698c283924a9725de8b5b1abbf, type: 3}
   m_PrefabInstance: {fileID: 6659444818731648888}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &2045123248 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7861253139113077449, guid: 0d41cfd61a837fb4aaad0acd99d8b474, type: 3}
+  m_PrefabInstance: {fileID: 792403386374738702}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &792403386374738702
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1512,6 +1527,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2835791596279961572, guid: 0d41cfd61a837fb4aaad0acd99d8b474, type: 3}
       insertIndex: -1
       addedObject: {fileID: 792403386374738705}
+    - targetCorrespondingSourceObject: {fileID: 2835791596279961572, guid: 0d41cfd61a837fb4aaad0acd99d8b474, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 792403386374738706}
   m_SourcePrefab: {fileID: 100100000, guid: 0d41cfd61a837fb4aaad0acd99d8b474, type: 3}
 --- !u!4 &792403386374738703 stripped
 Transform:
@@ -1547,6 +1565,23 @@ MonoBehaviour:
   espadasCheio: {fileID: -1209903221105704126, guid: 9761c6f8e1b493f4eb5236c3c245cf4d, type: 3}
   ourosVazio: {fileID: 7742816135783698714, guid: 4c1b931479a0ea142af657445beceb83, type: 3}
   ourosCheio: {fileID: 7035640827511919432, guid: 9761c6f8e1b493f4eb5236c3c245cf4d, type: 3}
+--- !u!114 &792403386374738706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792403386374738704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5137e962b93ad3b4592d82dbcd8f7648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shieldPrefab: {fileID: 6446479166075438546, guid: 62f7a24b7eb3b1b48a4488e8c4bb9767, type: 3}
+  firePointUp: {fileID: 1169270314}
+  firePointDown: {fileID: 2045123248}
+  firePointLeft: {fileID: 1418465087}
+  firePointRight: {fileID: 792403386374738703}
 --- !u!4 &6507835127870147787 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5729842828173404222, guid: 851ad74ca0edffa4485276002a6ae20f, type: 3}

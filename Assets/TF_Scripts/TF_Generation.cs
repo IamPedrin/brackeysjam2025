@@ -19,6 +19,7 @@ public class TF_Generation : MonoBehaviour
     public GameObject corredorPrefab;
     private Vector2Int[,] roomSizes = new Vector2Int[5, 5]; 
     private HashSet<(Vector2Int, Vector2Int)> corridorConnections = new HashSet<(Vector2Int, Vector2Int)>();
+    private Vector3[,] roomCenters = new Vector3[5, 5];
 
     void Start()
     {
@@ -84,8 +85,7 @@ public class TF_Generation : MonoBehaviour
 
     Vector3 GetRoomCenter(int x, int y)
     {
-        Vector2Int size = roomSizes[x, y];
-        return new Vector3(x * setorSize + size.x / 2f, (-y) * setorSize - size.y / 2f, 0);
+        return roomCenters[x, y];
     }
 
     void InstantiateFloorplanTiles(Vector2Int roomA, Vector2Int roomB)
@@ -104,12 +104,13 @@ public class TF_Generation : MonoBehaviour
                     else if (new Vector2Int(x, y) == roomB && bossRoomPrefab != null)
                         prefab = bossRoomPrefab;
                     else if (salaPrefabs != null && salaPrefabs.Count > 0)
-                        prefab = salaPrefabs[rand.Next(salaPrefabs.Count)]; 
+                        prefab = salaPrefabs[rand.Next(salaPrefabs.Count)];
                     else
                         continue;
                     GameObject sala = Instantiate(prefab, pos, Quaternion.identity);
                     Vector2Int size = GetPrefabSize(sala);
                     roomSizes[x, y] = size;
+                    roomCenters[x, y] = sala.transform.position; 
                 }
             }
         }
@@ -251,6 +252,6 @@ public class TF_Generation : MonoBehaviour
         else
             rot = Quaternion.Euler(0, 0, 90); 
         GameObject corredor = Instantiate(corredorPrefab, mid, rot);
-        corredor.transform.localScale = new Vector3(length, 1, 1); // ajusta o tamanho do corredor
+        corredor.transform.localScale = new Vector3(length, 1, 1); // Mudar length pra 1 quando tiver o prefab do corredor
     }
 }

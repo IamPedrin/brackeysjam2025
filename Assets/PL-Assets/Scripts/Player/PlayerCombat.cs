@@ -51,7 +51,6 @@ public class PlayerCombat : MonoBehaviour
             shootDirection = new Vector2(0, Mathf.Sign(rawDirection.y));
         }
 
- 
         Transform selectedFirePoint = SelectFirePoint(shootDirection);
 
         if (selectedFirePoint == null)
@@ -59,7 +58,6 @@ public class PlayerCombat : MonoBehaviour
             Debug.LogError("Nenhum Fire Point válido encontrado para a direção: " + shootDirection);
             return;
         }
-        
 
         float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
