@@ -1049,11 +1049,11 @@ PrefabInstance:
     - target: {fileID: 3552651163410243047, guid: 0d41cfd61a837fb4aaad0acd99d8b474, type: 3}
       propertyPath: fullHeartSprite
       value: 
-      objectReference: {fileID: 295851345137346075, guid: 364e42e64a67c0243a01319f95a994db, type: 3}
+      objectReference: {fileID: -8099793301505379066, guid: 522cc06688559aa46bdca81198b1d152, type: 3}
     - target: {fileID: 3552651163410243047, guid: 0d41cfd61a837fb4aaad0acd99d8b474, type: 3}
       propertyPath: emptyHeartSprite
       value: 
-      objectReference: {fileID: 3241958795073423207, guid: b37ab2261d9da1c429b1348f61cf2d6e, type: 3}
+      objectReference: {fileID: 7420451771677214553, guid: 8cb4a1f6bd821424293aed535263d23d, type: 3}
     - target: {fileID: 5960469292591634630, guid: 0d41cfd61a837fb4aaad0acd99d8b474, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.54
