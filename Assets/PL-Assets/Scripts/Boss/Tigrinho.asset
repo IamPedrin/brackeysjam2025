@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4104730568344524da993cd731a636b4, type: 3}
+  m_Name: Tigrinho
+  m_EditorClassIdentifier: 
+  maxHealth: 1000
+  idleDuration: 3
+  cardAttackTelegraphDuration: 2
+  cardAttackActiveDuration: 1
+  numberOfCardAttacks: 5
+  cardAttackDamage: 2
+  warningIndicatorPrefab: {fileID: 5203249121900194328, guid: 1c6249046a7bca34482c9747cf699719, type: 3}
+  cardAttackPrefab: {fileID: 9038948182696929870, guid: 1d210f554e9456a4c859d560006133b3, type: 3}
+  numberOfCoinsToThrow: 3
+  timeBetweenCoins: 0.3
+  coinAttackDamage: 1
+  coinProjectileSpeed: 10
+  coinProjectilePrefab: {fileID: 5311188052350928423, guid: 330549f888c203a4eae4d0a61c687122, type: 3}

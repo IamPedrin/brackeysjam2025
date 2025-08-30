@@ -15,7 +15,7 @@ MonoBehaviour:
   patrolSpeed: 2
   chaseSpeed: 4
   health: 10
-  lineOfSightRadius: 20
+  lineOfSightRadius: 10
   aggroDuration: 2
   attackType: 1
   attackRange: 8

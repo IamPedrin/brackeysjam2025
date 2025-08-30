@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5909592930761775788}
   - component: {fileID: -2174454844379037688}
   m_Layer: 10
-  m_Name: Bullet
+  m_Name: CoinAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
