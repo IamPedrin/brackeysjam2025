@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 3561117716855797906}
   - component: {fileID: 8188443756229019565}
   - component: {fileID: 2684595109583551381}
+  - component: {fileID: 2772150415434851417}
   m_Layer: 0
   m_Name: Apostador
   m_TagString: Enemy
@@ -281,3 +282,17 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2772150415434851417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5360471671833824874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20f93baa58628bb42a4fa7e883d361e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chipPrefab: {fileID: 3490553531996430547, guid: 168eca731347a034eadb63934d722cee, type: 3}
+  cartaPrefab: {fileID: 5832344461330535086, guid: 1f5e3395725cc3d4484030eb64bcdf47, type: 3}
