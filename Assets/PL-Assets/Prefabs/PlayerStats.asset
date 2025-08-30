@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd30be4c4bba2b245b92bd28de4a68a9, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  maxHearts: 3
+  maxHearts: 5
   moveSpeed: 8
   attackSpeed: 4
   projectileDamage: 1

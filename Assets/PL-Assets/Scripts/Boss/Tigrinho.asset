@@ -16,7 +16,7 @@ MonoBehaviour:
   idleDuration: 3
   cardAttackTelegraphDuration: 2
   cardAttackActiveDuration: 1
-  numberOfCardAttacks: 5
+  numberOfCardAttacks: 20
   cardAttackDamage: 2
   warningIndicatorPrefab: {fileID: 5203249121900194328, guid: 1c6249046a7bca34482c9747cf699719, type: 3}
   cardAttackPrefab: {fileID: 9038948182696929870, guid: 1d210f554e9456a4c859d560006133b3, type: 3}
