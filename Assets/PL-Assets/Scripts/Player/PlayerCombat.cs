@@ -67,7 +67,8 @@ public class PlayerCombat : MonoBehaviour
         PlayerProjectile projectile = projectileGO.GetComponent<PlayerProjectile>();
         if (projectile != null)
         {
-            projectile.Setup((int)stats.projectileDamage, stats.projectileSpeed);
+            float finalDamage = stats.projectileDamage * stats.damageMultiplier;
+            projectile.Setup((int)finalDamage, stats.projectileSpeed);
         }
     }
 

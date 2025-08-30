@@ -22,6 +22,7 @@ public class TF_Cartas : MonoBehaviour
     public Sprite copasVazio, copasCheio;
     public Sprite espadasVazio, espadasCheio;
     public Sprite ourosVazio, ourosCheio;
+    public bool canUseCopas = true;
 
     public class MaoCartas
     {
@@ -59,6 +60,7 @@ public class TF_Cartas : MonoBehaviour
                     }
                     break;
                 case Cartas.Copas:
+                    if (!uiScript.canUseCopas) return false;
                     var playerObj = GameObject.FindWithTag("Player");
                     if (playerObj != null)
                     {
@@ -69,10 +71,22 @@ public class TF_Cartas : MonoBehaviour
                     }
                     break;
                 case Cartas.Espadas:
-                    //+25% de dano por 45 secs
+                    var playerEspadas = GameObject.FindWithTag("Player");
+                    if (playerEspadas != null)
+                    {
+                        var stats = playerEspadas.GetComponent<PlayerStats>();
+                        if (stats != null)
+                            uiScript.StartCoroutine(uiScript.IncreaseDamageForSeconds(stats, 1.25f, 45f));
+                    }
                     break;
                 case Cartas.Ouros:
-                    //+1.5% de fichas derrotando inimigos por 45 secs
+                    var playerOuros = GameObject.FindWithTag("Player");
+                    if (playerOuros != null)
+                    {
+                        var stats = playerOuros.GetComponent<PlayerStats>();
+                        if (stats != null)
+                            uiScript.StartCoroutine(uiScript.IncreaseChipGainForSeconds(stats, 0.015f, 45f));
+                    }
                     break;
             }
             uiScript.AtualizarUI();
@@ -152,5 +166,21 @@ public class TF_Cartas : MonoBehaviour
         cartaCopasUI.sprite = maoCartas.GetCartasMao().Contains(Cartas.Copas) ? copasCheio : copasVazio;
         cartaEspadasUI.sprite = maoCartas.GetCartasMao().Contains(Cartas.Espadas) ? espadasCheio : espadasVazio;
         cartaOurosUI.sprite = maoCartas.GetCartasMao().Contains(Cartas.Ouros) ? ourosCheio : ourosVazio;
+    }
+
+    private System.Collections.IEnumerator IncreaseDamageForSeconds(PlayerStats stats, float multiplier, float seconds)
+    {
+        float original = stats.damageMultiplier;
+        stats.damageMultiplier *= multiplier;
+        yield return new WaitForSeconds(seconds);
+        stats.damageMultiplier = original;
+    }
+
+    private System.Collections.IEnumerator IncreaseChipGainForSeconds(PlayerStats stats, float percent, float seconds)
+    {
+        float original = stats.chipGainMultiplier;
+        stats.chipGainMultiplier += percent;
+        yield return new WaitForSeconds(seconds);
+        stats.chipGainMultiplier = original;
     }
 }

@@ -59,11 +59,11 @@ public class PlayerHealth : MonoBehaviour
     
     public void TakeDamage(int damageAmount)
     {
-        currentHealth -= damageAmount;
+        if (stats.isInvulnerable) return;
+        int finalDamage = Mathf.RoundToInt(damageAmount * stats.damageTakenMultiplier);
+        currentHealth -= finalDamage;
         currentHealth = Mathf.Clamp(currentHealth, 0, stats.maxHearts);
-
         UpdateHealthUI();
-
         if (currentHealth <= 0)
         {
             Die();
