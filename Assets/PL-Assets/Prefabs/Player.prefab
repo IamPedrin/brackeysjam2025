@@ -47,7 +47,9 @@ GameObject:
   - component: {fileID: 1572394252397861583}
   - component: {fileID: 8458842123414964496}
   - component: {fileID: 3552651163410243047}
-  m_Layer: 0
+  - component: {fileID: 117959899307874128}
+  - component: {fileID: 1945868239930892139}
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -154,7 +156,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &7341336914034048212
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -243,7 +245,19 @@ MonoBehaviour:
     m_ActionId: 764d112b-502e-4c5d-a10d-db2b76f99a0a
     m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8458842123414964496}
+        m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
+        m_MethodName: OnShoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: e67e5d38-3417-4d67-98fa-ac6ce01b84f1
     m_ActionName: 'Player/Attack[/Mouse/leftButton]'
   m_NeverAutoSwitchControlSchemes: 0
@@ -293,11 +307,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 069091e633b54d14db39a1fc9707515e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 0}
-  heartPrefab: {fileID: 0}
+  stats: {fileID: 11400000, guid: d281cf7e5d81da14daf2f35c0ba88adc, type: 2}
+  heartPrefab: {fileID: 3837989082068534704, guid: 58ab61ae274f9144092f4d30dc54e764, type: 3}
   heartsParent: {fileID: 0}
-  fullHeartSprite: {fileID: 0}
-  emptyHeartSprite: {fileID: 0}
+  fullHeartSprite: {fileID: 295851345137346075, guid: 364e42e64a67c0243a01319f95a994db, type: 3}
+  emptyHeartSprite: {fileID: 3241958795073423207, guid: b37ab2261d9da1c429b1348f61cf2d6e, type: 3}
+--- !u!114 &117959899307874128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2835791596279961572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d93bf3647c1e08b428c21d8c25debfd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cartaPausUI: {fileID: 0}
+  cartaCopasUI: {fileID: 0}
+  cartaEspadasUI: {fileID: 0}
+  cartaOurosUI: {fileID: 0}
+  pausVazio: {fileID: -2948008535621134742, guid: 4c1b931479a0ea142af657445beceb83, type: 3}
+  pausCheio: {fileID: -6287384416022553831, guid: 9761c6f8e1b493f4eb5236c3c245cf4d, type: 3}
+  copasVazio: {fileID: 7540210195968707425, guid: 4c1b931479a0ea142af657445beceb83, type: 3}
+  copasCheio: {fileID: -6615675202023742229, guid: 9761c6f8e1b493f4eb5236c3c245cf4d, type: 3}
+  espadasVazio: {fileID: 1210800125995378619, guid: 4c1b931479a0ea142af657445beceb83, type: 3}
+  espadasCheio: {fileID: -1209903221105704126, guid: 9761c6f8e1b493f4eb5236c3c245cf4d, type: 3}
+  ourosVazio: {fileID: 7742816135783698714, guid: 4c1b931479a0ea142af657445beceb83, type: 3}
+  ourosCheio: {fileID: 7035640827511919432, guid: 9761c6f8e1b493f4eb5236c3c245cf4d, type: 3}
+  canUseCopas: 1
+--- !u!114 &1945868239930892139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2835791596279961572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5137e962b93ad3b4592d82dbcd8f7648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shieldPrefab: {fileID: 6446479166075438546, guid: 62f7a24b7eb3b1b48a4488e8c4bb9767, type: 3}
+  firePointUp: {fileID: 3820315252660525344}
+  firePointDown: {fileID: 7861253139113077449}
+  firePointLeft: {fileID: 7101515684876734515}
+  firePointRight: {fileID: 2618303041383443145}
 --- !u!1 &5802859384254756147
 GameObject:
   m_ObjectHideFlags: 0

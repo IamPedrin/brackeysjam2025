@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        rb.linearVelocity = moveInput * stats.moveSpeed;
+        rb.linearVelocity = moveInput * stats.moveSpeed * stats.speedMultiplier;
 
         if (moveInput.sqrMagnitude > 0.1f)
         {

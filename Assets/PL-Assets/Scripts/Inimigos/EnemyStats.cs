@@ -28,4 +28,9 @@ public class EnemyStats : ScriptableObject
     public GameObject projectilePrefab; // Ranged
     public float projectileSpeed = 8f; //  Ranged
 
+    [Header("Drops")]
+    public int chipsDrop = 100;
+    public TF_Cartas.Cartas cartaDropType = TF_Cartas.Cartas.Paus;
+    [Range(0f, 1f)] public float cartaDropChance = 0.2f;
+
 }
