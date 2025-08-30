@@ -21,7 +21,7 @@ public class BossHealth : MonoBehaviour
             return;
         }
         
-        // Configura a vida inicial diretamente do BossStats
+  
         currentHealth = bossStats.maxHealth;
         UpdateHealthUI();
     }
@@ -50,16 +50,9 @@ public class BossHealth : MonoBehaviour
     private void Die()
     {
         Debug.Log("O CHEFE FOI DERROTADO!");
-        // --- LÓGICA DE VITÓRIA AQUI ---
-        // - Pare todos os ataques (desative o script BossAI)
-        // - Toque uma animação de morte épica
-        // - Instancie efeitos visuais e sonoros de explosão
-        // - Drope loot especial
-        // - Chame uma função no seu GameManager para registrar a vitória
-        // - Pare a música da batalha e toque uma música de vitória
+
         
-        GetComponent<BossAI>().enabled = false; // Desativa a IA para parar os ataques
-        // Adicione aqui sua animação de morte
-        Destroy(gameObject, 5f); // Destrói o objeto do chefe após 5 segundos
+        GetComponent<BossAI>().enabled = false;
+        Destroy(gameObject, 5f);
     }
 }

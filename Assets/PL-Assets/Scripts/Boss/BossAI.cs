@@ -20,7 +20,7 @@ public class BossAI : MonoBehaviour
 
     void Start()
     {
-        // A validação de vida agora é responsabilidade do BossHealth
+
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
         SetState(BossState.Idle);
     }
@@ -41,7 +41,6 @@ public class BossAI : MonoBehaviour
                 if (stateTimer <= 0) SetState(BossState.Idle, true);
                 break;
             case BossState.CoinAttack:
-                // Lógica de transição controlada pela Corrotina
                 break;
         }
     }
