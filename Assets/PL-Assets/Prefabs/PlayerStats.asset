@@ -14,7 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHearts: 3
   moveSpeed: 8
+  speedMultiplier: 0.5
   attackSpeed: 4
   projectileDamage: 1
   projectileSpeed: 15
   projectilePrefab: {fileID: 465630300667803718, guid: 86a1fb4553b59864496b0fe66208bfe8, type: 3}
+  chips: 2147482647
+  damageMultiplier: 1
+  damageTakenMultiplier: 2
+  chipGainMultiplier: 1
+  isInvulnerable: 0

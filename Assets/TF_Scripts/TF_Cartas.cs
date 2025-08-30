@@ -146,20 +146,6 @@ public class TF_Cartas : MonoBehaviour
             maoCartas.BIGGAMBA();
     }
 
-    void Update()
-    {
-        if (Keyboard.current.digit1Key.wasPressedThisFrame)
-            maoCartas.UsarCarta(Cartas.Paus);
-        if (Keyboard.current.digit2Key.wasPressedThisFrame)
-            maoCartas.UsarCarta(Cartas.Copas);
-        if (Keyboard.current.digit3Key.wasPressedThisFrame)
-            maoCartas.UsarCarta(Cartas.Espadas);
-        if (Keyboard.current.digit4Key.wasPressedThisFrame)
-            maoCartas.UsarCarta(Cartas.Ouros);
-        if (Keyboard.current.digit5Key.wasPressedThisFrame)
-            maoCartas.BIGGAMBA();
-    }
-
     void AtualizarUI()
     {
         cartaPausUI.sprite = maoCartas.GetCartasMao().Contains(Cartas.Paus) ? pausCheio : pausVazio;
